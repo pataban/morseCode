@@ -14,25 +14,25 @@ class EncodeCharFrame(tk.Frame):
         self.keyPressTime=None
 
         self.menuButton=tk.Button(self,text="Menu")
-        self.menuButton.grid(row=0,column=0)
+        self.menuButton.grid(row=0,column=0,columnspan=2)
 
         self.promptLabel=tk.Label(self,text=self.prompt)
-        self.promptLabel.grid(row=0,column=1)
-
-        self.dotButton=tk.Button(self,text="Dot", command=self.addDot)
-        self.dotButton.grid(row=1,column=0)
-
-        self.dashButton=tk.Button(self,text="Dash", command=self.addDash)
-        self.dashButton.grid(row=1,column=1)
+        self.promptLabel.grid(row=1,column=0,columnspan=2)
 
         self.answerLabel=tk.Label(self,text="")
-        self.answerLabel.grid(row=2,columnspan=2)
+        self.answerLabel.grid(row=2,column=0,columnspan=2)
+
+        self.dotButton=tk.Button(self,text="Dot", command=self.addDot)
+        self.dotButton.grid(row=3,column=0)
+
+        self.dashButton=tk.Button(self,text="Dash", command=self.addDash)
+        self.dashButton.grid(row=3,column=1)
 
         self.submitButton=tk.Button(self,text="Submit",command=self.chkAnswer)
-        self.submitButton.grid(row=3,column=0)
+        self.submitButton.grid(row=4,column=0,columnspan=2)
 
         self.validationResultLabel=tk.Label(self,text="")
-        self.validationResultLabel.grid(row=3,column=1)
+        self.validationResultLabel.grid(row=5,column=0,columnspan=2)
 
         self.bind("<KeyPress>",self.startSignal)
         self.bind("<KeyRelease>",self.endSignal)
