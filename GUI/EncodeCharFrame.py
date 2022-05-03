@@ -6,7 +6,7 @@ import random
 import time
 from constants.constants import *
 
-class EncodeFrame(tk.Frame):
+class EncodeCharFrame(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.prompt=self.makePrompt()
