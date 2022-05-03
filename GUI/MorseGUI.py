@@ -41,11 +41,13 @@ class MorseGUI(tk.Frame):
         
     def buildChartFrame(self):
         chart=ImageTk.PhotoImage(Image.open("grafics/morseChart1.png"))
-        self.chartFrame=tk.Label(self, image=chart)
+        self.chartFrame=tk.Button(self, image=chart, command=self.showMenuFrame)
         self.chartFrame.image=chart
 
     def buildTreeFrame(self):
-        pass
+        tree=ImageTk.PhotoImage(Image.open("grafics/morseTree1.png"))
+        self.treeFrame=tk.Button(self, image=tree, command=self.showMenuFrame)
+        self.treeFrame.image=tree
 
     def buildEncodeCharFrame(self):
         self.encodeCharFrame=EncodeCharFrame(self)
@@ -74,7 +76,10 @@ class MorseGUI(tk.Frame):
         self.chartFrame.pack()
 
     def showTreeFrame(self):
-        pass
+        self.hideAllFrames()
+        if self.treeFrame is None:
+            self.buildTreeFrame()
+        self.treeFrame.pack()
 
     def showEncodeCharFrame(self):
         self.hideAllFrames()
@@ -89,10 +94,16 @@ class MorseGUI(tk.Frame):
         self.decodeCharFrame.pack()
 
     def showEncodeFrame(self):
-        pass
+        self.hideAllFrames()
+        if self.encodeFrame is None:
+            self.buildEncodeFrame()
+        self.encodeFrame.pack()
 
     def showDecodeFrame(self):
-        pass
+        self.hideAllFrames()
+        if self.decodeFrame is None:
+            self.buildDecodeFrame()
+        self.decodeFrame.pack()
 
     def hideAllFrames(self):
         if(self.menuFrame!=None):   
@@ -115,5 +126,9 @@ class MorseGUI(tk.Frame):
     def clearSessionData(self):
         self.hideAllFrames()
         self.menuFrame=None
+        self.chartFrame=None
+        self.treeFrame=None
+        self.encodeCharFrame=None
+        self.decodeCharFrame=None
         self.encodeFrame=None
         self.decodeFrame=None
