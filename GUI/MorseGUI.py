@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from GUI.EncodeCharFrame import EncodeCharFrame
 from GUI.DecodeCharFrame import DecodeCharFrame
-
+from PIL import ImageTk,Image
 
 class MorseGUI(tk.Frame):
     def __init__(self, master=tk.Tk()):
@@ -40,7 +40,9 @@ class MorseGUI(tk.Frame):
         decodeButton.grid(row=2,column=1)
         
     def buildChartFrame(self):
-        pass
+        chart=ImageTk.PhotoImage(Image.open("grafics/morseChart1.png"))
+        self.chartFrame=tk.Label(self, image=chart)
+        self.chartFrame.image=chart
 
     def buildTreeFrame(self):
         pass
@@ -66,7 +68,10 @@ class MorseGUI(tk.Frame):
         self.menuFrame.pack()
 
     def showChartFrame(self):
-        pass
+        self.hideAllFrames()
+        if self.chartFrame is None:
+            self.buildChartFrame()
+        self.chartFrame.pack()
 
     def showTreeFrame(self):
         pass
