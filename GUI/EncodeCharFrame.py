@@ -5,11 +5,11 @@ from constants.Signal import Signal
 import random
 import time
 from constants.constants import *
-
+from dataCreation import *
 class EncodeCharFrame(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.prompt=self.makePrompt()
+        self.prompt=makePrompt()
         self.answer=[]
         self.keyPressTime=None
 
@@ -39,26 +39,6 @@ class EncodeCharFrame(tk.Frame):
         self.bind("<Return>",self.chkAnswer)
         self.focus_set()
 
-    def makePrompt(self):
-        return chr(int(random.random()*26)+65)
-
-    def addDot(self):
-        self.answer.append(Signal.DOT)
-        self.answerLabel["text"]=self.answerLabel["text"]+ " Dot"
-
-    def addDash(self):
-        self.answer.append(Signal.DASH)
-        self.answerLabel["text"]=self.answerLabel["text"]+ " Dash"
-
-    def chkAnswer(self,event=None):
-        if(self.answer==EncodingChart[self.prompt]):
-            self.prompt=self.makePrompt()
-            self.promptLabel["text"]=self.prompt
-            self.validationResultLabel["text"]=""
-        else:
-            self.validationResultLabel["text"]="Wrong"
-        self.answer=[]
-        self.answerLabel["text"]=""
 
     def startSignal(self,event=None):
         if self.keyPressTime is None:
@@ -72,3 +52,22 @@ class EncodeCharFrame(tk.Frame):
             else:
                 self.addDash()
             self.keyPressTime=None
+
+    def addDot(self):
+        self.answer.append(Signal.DOT)
+        self.answerLabel["text"]=self.answerLabel["text"]+ " Dot"
+
+    def addDash(self):
+        self.answer.append(Signal.DASH)
+        self.answerLabel["text"]=self.answerLabel["text"]+ " Dash"
+
+    def chkAnswer(self,event=None):
+        if(self.answer==EncodingChart[self.prompt]):
+            self.prompt=makePrompt()
+            self.promptLabel["text"]=self.prompt
+            self.validationResultLabel["text"]=""
+        else:
+            self.validationResultLabel["text"]="Wrong"
+        self.answer=[]
+        self.answerLabel["text"]=""
+
