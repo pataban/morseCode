@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from EncodeFrame import EncodeFrame
-from DecodeFrame import DecodeFrame
+from GUI.EncodeCharFrame import EncodeFrame
+from GUI.DecodeCharFrame import DecodeFrame
 
 
 class MorseGUI(tk.Frame):

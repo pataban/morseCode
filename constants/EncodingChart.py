@@ -1,4 +1,4 @@
-from Signal import *
+from constants.Signal import *
 
 class EncodingChart():
     def __class_getitem__(cls,key):

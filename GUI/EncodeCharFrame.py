@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
-from EncodingChart import EncodingChart
-from Signal import Signal
+from constants.EncodingChart import EncodingChart
+from constants.Signal import Signal
 import random
 import time
-from constants import *
+from constants.constants import *
 
 class EncodeFrame(tk.Frame):
     def __init__(self, master):

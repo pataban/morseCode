@@ -1,4 +1,4 @@
-from MorseGUI import MorseGUI
+from GUI.MorseGUI import MorseGUI
 
 if __name__ == "__main__":
 
