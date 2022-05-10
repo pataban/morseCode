@@ -8,6 +8,7 @@ class MorseGUI(tk.Frame):
     def __init__(self, master=tk.Tk()):
         super().__init__(master)
         master.title("Morse Code")
+        master.minsize(200, 100)
         self.pack()
         self.menuFrame=None
         self.chartFrame=None

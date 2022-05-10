@@ -28,8 +28,11 @@ class EncodeCharFrame(tk.Frame):
         self.dashButton=tk.Button(self,text="Dash", command=self.addDash)
         self.dashButton.grid(row=3,column=1)
 
+        self.skipButton=tk.Button(self,text="Skip",command=self.setPrompt)
+        self.skipButton.grid(row=4,column=0)
+        
         self.submitButton=tk.Button(self,text="Submit",command=self.chkAnswer)
-        self.submitButton.grid(row=4,column=0,columnspan=2)
+        self.submitButton.grid(row=4,column=1)
 
         self.validationResultLabel=tk.Label(self,text="")
         self.validationResultLabel.grid(row=5,column=0,columnspan=2)
@@ -37,6 +40,7 @@ class EncodeCharFrame(tk.Frame):
         self.bind("<KeyPress>",self.startSignal)
         self.bind("<KeyRelease>",self.endSignal)
         self.bind("<Return>",self.chkAnswer)
+        self.bind("<BackSpace>",self.setPrompt)
         self.focus_set()
 
 
@@ -63,11 +67,15 @@ class EncodeCharFrame(tk.Frame):
 
     def chkAnswer(self,event=None):
         if(self.answer==EncodingChart[self.prompt]):
-            self.prompt=makePrompt()
-            self.promptLabel["text"]=self.prompt
-            self.validationResultLabel["text"]=""
+            self.setPrompt()
         else:
             self.validationResultLabel["text"]="Wrong"
         self.answer=[]
         self.answerLabel["text"]=""
 
+    def setPrompt(self,evemt=None):
+        self.prompt=makePrompt()
+        self.promptLabel["text"]=self.prompt
+        self.validationResultLabel["text"]=""
+        self.answer=[]
+        self.answerLabel["text"]=""
