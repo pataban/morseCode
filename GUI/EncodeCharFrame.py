@@ -9,14 +9,14 @@ from dataCreation import *
 class EncodeCharFrame(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.prompt=makePrompt()
+        self.prompt=''
         self.answer=[]
         self.keyPressTime=None
 
         self.menuButton=tk.Button(self,text="Menu")
         self.menuButton.grid(row=0,column=0,columnspan=2)
 
-        self.promptLabel=tk.Label(self,text=self.prompt)
+        self.promptLabel=tk.Label(self)
         self.promptLabel.grid(row=1,column=0,columnspan=2)
 
         self.answerLabel=tk.Label(self,text="")
@@ -42,6 +42,7 @@ class EncodeCharFrame(tk.Frame):
         self.bind("<Return>",self.chkAnswer)
         self.bind("<BackSpace>",self.setPrompt)
         self.focus_set()
+        self.setPrompt()
 
 
     def startSignal(self,event=None):
@@ -73,7 +74,7 @@ class EncodeCharFrame(tk.Frame):
         self.answer=[]
         self.answerLabel["text"]=""
 
-    def setPrompt(self,evemt=None):
+    def setPrompt(self,event=None):
         self.prompt=makePrompt()
         self.promptLabel["text"]=self.prompt
         self.validationResultLabel["text"]=""
