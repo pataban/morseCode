@@ -1,68 +1,83 @@
 import tkinter as tk
-from tkinter import ttk
+from PIL import ImageTk, Image
 from GUI.EncodeCharFrame import EncodeCharFrame
 from GUI.DecodeCharFrame import DecodeCharFrame
-from PIL import ImageTk,Image
+from static.constants import *
+
 
 class MorseGUI(tk.Frame):
     def __init__(self, master=tk.Tk()):
         super().__init__(master)
         master.title("Morse Code")
-        master.minsize(200, 100)
-        self.pack()
-        self.menuFrame=None
-        self.chartFrame=None
-        self.treeFrame=None
-        self.encodeCharFrame=None
-        self.decodeCharFrame=None
-        self.encodeFrame=None
-        self.decodeFrame=None
+        master.minsize(MENU_SIZE[0], MENU_SIZE[1])
+        self.menuFrame = None
+        self.chartFrame = None
+        self.treeFrame = None
+        self.encodeCharFrame = None
+        self.decodeCharFrame = None
+        self.encodeFrame = None
+        self.decodeFrame = None
         self.showMenuFrame()
 
     def buildMenuFrame(self):
-        self.menuFrame=tk.Frame(self)
+        self.menuFrame = tk.Frame(self)
 
-        chartButton=tk.Button(self.menuFrame,text="Chart",command=self.showChartFrame)
-        chartButton.grid(row=0,column=0)
+        chartButton = tk.Button(
+            self.menuFrame, text="Chart", command=self.showChartFrame)
+        chartButton.grid(row=0, column=0, ipadx=PADDING_DEFAULT,
+                         ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
 
-        treeButton=tk.Button(self.menuFrame,text="Tree",command=self.showTreeFrame)
-        treeButton.grid(row=0,column=1)
+        treeButton = tk.Button(self.menuFrame, text="Tree",
+                               command=self.showTreeFrame)
+        treeButton.grid(row=0, column=1, ipadx=PADDING_DEFAULT,
+                        ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
 
-        encodeCharButton=tk.Button(self.menuFrame,text="Encode Char",command=self.showEncodeCharFrame)
-        encodeCharButton.grid(row=1,column=0)
+        encodeCharButton = tk.Button(
+            self.menuFrame, text="Encode Char", command=self.showEncodeCharFrame)
+        encodeCharButton.grid(row=1, column=0, ipadx=PADDING_DEFAULT,
+                              ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
 
-        decodeCharButton=tk.Button(self.menuFrame,text="Decode Char",command=self.showDecodeCharFrame)
-        decodeCharButton.grid(row=1,column=1)
+        decodeCharButton = tk.Button(
+            self.menuFrame, text="Decode Char", command=self.showDecodeCharFrame)
+        decodeCharButton.grid(row=1, column=1, ipadx=PADDING_DEFAULT,
+                              ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
 
-        encodeButton=tk.Button(self.menuFrame,text="Encode",command=self.showEncodeFrame)
-        encodeButton.grid(row=2,column=0)
+        encodeButton = tk.Button(
+            self.menuFrame, text="Encode", command=self.showEncodeFrame)
+        encodeButton.grid(row=2, column=0, ipadx=PADDING_DEFAULT,
+                          ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
 
-        decodeButton=tk.Button(self.menuFrame,text="Decode",command=self.showDecodeFrame)
-        decodeButton.grid(row=2,column=1)
-        
+        decodeButton = tk.Button(
+            self.menuFrame, text="Decode", command=self.showDecodeFrame)
+        decodeButton.grid(row=2, column=1, ipadx=PADDING_DEFAULT,
+                          ipady=PADDING_DEFAULT, padx=PADDING_DEFAULT, pady=PADDING_DEFAULT)
+
     def buildChartFrame(self):
-        chart=ImageTk.PhotoImage(Image.open("grafics/morseChart1.png"))
-        self.chartFrame=tk.Button(self, image=chart, command=self.showMenuFrame)
-        self.chartFrame.image=chart
+        chart = ImageTk.PhotoImage(Image.open("grafics/morseChart2.png"))
+        self.chartFrame = tk.Button(
+            self, image=chart, command=self.showMenuFrame)
+        self.chartFrame.image = chart
 
     def buildTreeFrame(self):
-        tree=ImageTk.PhotoImage(Image.open("grafics/morseTree1.png"))
-        self.treeFrame=tk.Button(self, image=tree, command=self.showMenuFrame)
-        self.treeFrame.image=tree
+        tree = ImageTk.PhotoImage(Image.open(
+            "grafics/morseTree1.png").resize(MORSE_TREE_IMG_SIZE))
+        self.treeFrame = tk.Button(
+            self, image=tree, command=self.showMenuFrame)
+        self.treeFrame.image = tree
 
     def buildEncodeCharFrame(self):
-        self.encodeCharFrame=EncodeCharFrame(self)
-        self.encodeCharFrame.menuButton["command"]=self.showMenuFrame
+        self.encodeCharFrame = EncodeCharFrame(self, self.showMenuFrame)
 
     def buildDecodeCharFrame(self):
-        self.decodeCharFrame=DecodeCharFrame(self)
-        self.decodeCharFrame.menuButton["command"]=self.showMenuFrame
+        self.decodeCharFrame = DecodeCharFrame(self, self.showMenuFrame)
 
     def buildEncodeFrame(self):
-        pass
+        self.encodeFrame = tk.Button(self, text="Menu")
+        self.encodeFrame["command"] = self.showMenuFrame
 
     def buildDecodeFrame(self):
-        pass
+        self.decodeFrame = tk.Button(self, text="Menu")
+        self.decodeFrame["command"] = self.showMenuFrame
 
     def showMenuFrame(self):
         self.hideAllFrames()
@@ -107,29 +122,28 @@ class MorseGUI(tk.Frame):
         self.decodeFrame.pack()
 
     def hideAllFrames(self):
-        if(self.menuFrame!=None):   
+        if self.menuFrame is not None:
             self.menuFrame.pack_forget()
-        if(self.chartFrame!=None):   
+        if self.chartFrame is not None:
             self.chartFrame.pack_forget()
-        if(self.treeFrame!=None):   
+        if self.treeFrame is not None:
             self.treeFrame.pack_forget()
-        if(self.encodeCharFrame!=None):   
+        if self.encodeCharFrame is not None:
             self.encodeCharFrame.pack_forget()
-        if(self.decodeCharFrame!=None):
+        if self.decodeCharFrame is not None:
             self.decodeCharFrame.pack_forget()
-        if(self.encodeFrame!=None):   
+        if self.encodeFrame is not None:
             self.encodeFrame.pack_forget()
-        if(self.decodeFrame!=None):
+        if self.decodeFrame is not None:
             self.decodeFrame.pack_forget()
-        self.pack() 
-        return
+        self.pack()
 
     def clearSessionData(self):
         self.hideAllFrames()
-        self.menuFrame=None
-        self.chartFrame=None
-        self.treeFrame=None
-        self.encodeCharFrame=None
-        self.decodeCharFrame=None
-        self.encodeFrame=None
-        self.decodeFrame=None
+        self.menuFrame = None
+        self.chartFrame = None
+        self.treeFrame = None
+        self.encodeCharFrame = None
+        self.decodeCharFrame = None
+        self.encodeFrame = None
+        self.decodeFrame = None

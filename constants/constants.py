@@ -1,4 +1,0 @@
-
-
-
-KEY_HOLD_DURATION=0.25
